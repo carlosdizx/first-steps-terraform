@@ -7,6 +7,6 @@ terraform {
   }
 }
 resource "local_file" "products" {
-  content = "list products ..."
+  content  = "list products for the next weekend"
   filename = "products.txt"
 }
