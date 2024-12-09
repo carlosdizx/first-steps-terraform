@@ -1,6 +1,12 @@
+*
+
 .idea/
 
 terraform.tfstate
 terraform.tfstate.backup
 .terraform.lock.hcl
 .terraform/
+
+!*.tf
+!*.tfvars
+!*.tf.json
