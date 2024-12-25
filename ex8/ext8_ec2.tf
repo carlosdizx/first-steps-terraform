@@ -3,6 +3,6 @@ resource "aws_instance" "public_instance" {
   instance_type = "t2.micro"
   subnet_id     = aws_subnet.vpc_main_public_subnet.id
   tags = {
-    Name : "Wer Server 1"
+    Name : "Web Server 1"
   }
 }
