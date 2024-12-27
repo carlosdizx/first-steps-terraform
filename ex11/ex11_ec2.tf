@@ -15,8 +15,8 @@ resource "aws_instance" "public_instance" {
     echo "const http = require('http');
     const server = http.createServer((req, res) => {
       res.statusCode = 200;
-      res.setHeader('Content-Type', 'text/plain');
-      res.end('Hello World\\n');
+      res.setHeader('Content-Type', 'text/html');
+      res.end('<h1>Hello world!!</h1>');
     });
     server.listen(80, () => {
       console.log('Server running on port 80');
@@ -24,6 +24,13 @@ resource "aws_instance" "public_instance" {
     # Ejecuta la aplicación al iniciar la máquina
     nohup node /home/ec2-user/app.js &
   EOF
+  provisioner "local-exec" {
+    command = "echo 'Hello from ${aws_instance.public_instance.public_ip}' >> instance_created.txt"
+  }
+  provisioner "local-exec" {
+    when    = destroy
+    command = "echo 'Bye bye from ${self.public_ip}' >> instance_distroyed.txt"
+  }
   tags = {
     Name : "Web Server 1"
   }
