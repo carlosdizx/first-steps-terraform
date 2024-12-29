@@ -31,6 +31,16 @@ resource "aws_instance" "public_instance" {
     when    = destroy
     command = "echo 'Bye bye from ${self.public_ip}' >> instance_distroyed.txt"
   }
+
+  provisioner "remote-exec" {
+    inline = ["echo 'hello world' > ~/greeting.txt"]
+    connection {
+      type        = "ssh"
+      host        = self.public_ip
+      user        = "ec2-user"
+      private_key = file("myKey.pem")
+    }
+  }
   tags = {
     Name : "Web Server 1"
   }
