@@ -14,8 +14,12 @@ variable "tags" {
 }
 
 
-variable "instance_ami_id" {
-  description = "Id de instancia us-east-1"
-  type        = string
-  default     = "ami-01816d07b1128cd2d"
+variable "instance_parameters" {
+  description = "Parámetros de la instancia"
+  type        = map(string)
+  default = {
+    ami  = "ami-01816d07b1128cd2d"
+    type = "t2.micro"
+  }
 }
+

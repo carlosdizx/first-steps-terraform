@@ -1,6 +1,6 @@
 resource "aws_instance" "public_instance" {
-  ami                    = "ami-01816d07b1128cd2d"
-  instance_type          = "t2.micro"
+  ami                    = var.instance_parameters.ami
+  instance_type          = var.instance_parameters.type
   subnet_id              = aws_subnet.public_subnet.id
   key_name               = data.aws_key_pair.myKey.key_name
   vpc_security_group_ids = [aws_security_group.sg_public_instance.id]
@@ -38,15 +38,6 @@ resource "aws_instance" "public_instance" {
     command = "echo 'Bye bye from ${self.public_ip}' >> instance_distroyed.txt"
   }
 
-  # provisioner "remote-exec" {
-  #   inline = ["echo 'hello world' > ~/greeting.txt"]
-  #   connection {
-  #     type = "ssh"
-  #     host = self.public_ip
-  #     user = "ec2-user"
-  #     private_key = file("myKey.pem")
-  #   }
-  # }
   tags = {
     Name : "Web Server 1"
   }
