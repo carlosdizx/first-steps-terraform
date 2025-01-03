@@ -4,18 +4,14 @@ resource "aws_instance" "public_instance" {
   subnet_id              = aws_subnet.public_subnet.id
   key_name               = data.aws_key_pair.myKey.key_name
   vpc_security_group_ids = [aws_security_group.sg_public_instance.id]
-  user_data              = <<-EOF
+  #user_data = file("scripts/ec2_user_data.sh")
+  user_data = <<-EOF
     #!/bin/bash
     # Actualiza los paquetes
     yum update -y
-    # Instala curl y nvm (Node Version Manager)
-    yum install -y curl
-    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.4/install.sh | bash
-    export NVM_DIR="$HOME/.nvm"
-    [ -s "$NVM_DIR/nvm.sh" ] && \\. "$NVM_DIR/nvm.sh" # Carga nvm
-    [ -s "$NVM_DIR/bash_completion" ] && \\. "$NVM_DIR/bash_completion" # Carga autocompletado
-    # Instala la última versión de Node.js
-    nvm install --lts
+    # Instala Node.js
+    curl -sL https://rpm.nodesource.com/setup_16.x | bash -
+    yum install -y nodejs
     # Crea una aplicación simple en Node.js
     echo "const http = require('http');
     const server = http.createServer((req, res) => {
@@ -28,7 +24,6 @@ resource "aws_instance" "public_instance" {
     });" > /home/ec2-user/app.js
     # Ejecuta la aplicación al iniciar la máquina
     nohup node /home/ec2-user/app.js &
-    echo 'hello world' > ~/greeting.txt
   EOF
   provisioner "local-exec" {
     command = "echo 'Hello from ${aws_instance.public_instance.public_ip}' >> instance_created.txt"
