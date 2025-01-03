@@ -13,6 +13,7 @@ resource "aws_instance" "public_instance" {
     curl -sL https://rpm.nodesource.com/setup_16.x | bash -
     yum install -y nodejs
     # Crea una aplicación simple en Node.js
+    # shellcheck disable=SC2028
     echo "const http = require('http');
     const server = http.createServer((req, res) => {
       res.statusCode = 200;
