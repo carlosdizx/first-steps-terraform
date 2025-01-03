@@ -1,3 +1,4 @@
+/*
 resource "aws_instance" "public_instance" {
   ami                    = var.instance_parameters.ami
   instance_type          = var.instance_parameters.type
@@ -17,3 +18,4 @@ resource "aws_instance" "public_instance" {
     Name : "Web Server 1"
   }
 }
+*/
