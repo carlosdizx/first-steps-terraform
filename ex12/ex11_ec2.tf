@@ -1,4 +1,4 @@
-resource "aws_instance" "instance_base" {
+resource "aws_instance" "servers" {
   for_each                    = var.spec_instances
   ami                         = var.details_instances.ami
   instance_type               = var.details_instances.type
