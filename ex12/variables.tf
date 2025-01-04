@@ -24,24 +24,24 @@ variable "details_instances" {
 }
 
 variable "spec_instances" {
-  type = list(object({
-    name   = string
+  type = map(object({
     script = string
+    name   = string
   }))
-  default = [
-    {
-      name   = "Node Server"
+  default = {
+    "node-server" = {
       script = "node_script.sh"
-    },
-    {
-      name   = "PHP Server"
-      script = "php_script.sh"
-    },
-    {
-      name   = "Python Server"
-      script = "python_script.sh"
+      name   = "Node.js Server"
     }
-  ]
+    "php-server" = {
+      script = "php_script.sh"
+      name   = "PHP Server"
+    },
+    "python-server" = {
+      script = "python_script.sh"
+      name   = "Python Server"
+    },
+  }
 }
 
 

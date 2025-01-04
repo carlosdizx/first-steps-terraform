@@ -1,5 +1,5 @@
 resource "aws_instance" "instance_base" {
-  for_each                    = { for i, spec in var.spec_instances : i => spec }
+  for_each                    = var.spec_instances
   ami                         = var.details_instances.ami
   instance_type               = var.details_instances.type
   subnet_id                   = aws_subnet.public_subnet.id
@@ -8,6 +8,6 @@ resource "aws_instance" "instance_base" {
   user_data                   = file("scripts/${each.value.script}")
   user_data_replace_on_change = true
   tags = {
-    Name : each.value.name
+    Name = each.value.name
   }
 }
