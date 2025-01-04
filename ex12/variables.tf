@@ -23,3 +23,10 @@ variable "details_instances" {
   }
 }
 
+variable "spec_instances" {
+  description = "Lista de configuración por instancia"
+  type        = list(string)
+  default     = ["Node", "PHP", "Python"]
+}
+
+

@@ -1,4 +1,5 @@
 resource "aws_instance" "instance_base" {
+  for_each                    = toset(var.spec_instances)
   ami                         = var.details_instances.ami
   instance_type               = var.details_instances.type
   subnet_id                   = aws_subnet.public_subnet.id
@@ -7,6 +8,6 @@ resource "aws_instance" "instance_base" {
   user_data                   = file("scripts/ec2_user_data.sh")
   user_data_replace_on_change = true
   tags = {
-    Name : "Node App"
+    Name : each.value
   }
 }
