@@ -1,7 +1,7 @@
-/*
 output "output_ec2_ip_public" {
-  description = "Ip publica de la instancia EC2"
-  value       = "Dirección de la  http://${aws_instance.instance_base.public_ip}"
+  description = "Direcciones IP públicas de las instancias EC2"
+  value = {
+    for key, instance in aws_instance.instance_base :
+    instance.tags["Name"] => "http://${instance.public_ip}"
+  }
 }
-
-*/
