@@ -24,9 +24,25 @@ variable "details_instances" {
 }
 
 variable "spec_instances" {
-  description = "Lista de configuración por instancia"
-  type        = list(string)
-  default     = ["Node", "PHP", "Python"]
+  type = list(object({
+    name   = string
+    script = string
+  }))
+  default = [
+    {
+      name   = "Node Server"
+      script = "node_script.sh"
+    },
+    {
+      name   = "PHP Server"
+      script = "php_script.sh"
+    },
+    {
+      name   = "Python Server"
+      script = "python_script.sh"
+    }
+  ]
 }
+
 
 
