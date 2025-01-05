@@ -44,5 +44,8 @@ variable "spec_instances" {
   }
 }
 
-
-
+variable "enable_checker_instance" {
+  description = "Flag para habilitar la instancia que verifica las otras"
+  type        = bool
+  default     = false
+}
