@@ -23,4 +23,10 @@ resource "aws_instance" "checker_instance" {
   tags = {
     Name = "Checker Instance"
   }
+
+  provisioner "local-exec" {
+    when    = create
+    command = "echo 'Checking servers...' > app.js"
+  }
 }
+
