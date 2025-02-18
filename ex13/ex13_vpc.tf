@@ -73,6 +73,14 @@ resource "aws_security_group" "sg_public_instance" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
+  ingress {
+    description = "Streamlit over internet"
+    from_port   = 8501
+    to_port     = 8501
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
   egress {
     description = "HTTP over internet"
     from_port   = 0
