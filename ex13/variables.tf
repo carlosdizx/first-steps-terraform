@@ -18,7 +18,7 @@ variable "details_instances" {
   description = "Parámetros de la instancia"
   type        = map(string)
   default = {
-    ami  = "ami-04b4f1a9cf54c11d0"
+    ami  = "ami-01816d07b1128cd2d"
     type = "t2.micro"
   }
 }
