@@ -55,3 +55,15 @@ variable "db_port" {
   type        = number
   default     = 1433
 }
+
+variable "dynamodb_table_name" {
+  description = "Nombre de la tabla DynamoDB"
+  type        = string
+  default     = "documents"
+}
+
+variable "dynamodb_hash_key" {
+  description = "Clave primaria hash de la tabla"
+  type        = string
+  default     = "id"
+}
